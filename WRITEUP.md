@@ -62,6 +62,7 @@ Then, the size of each image: `32 px WIDTH × 32 px HEIGHT × 3 CHANNELS`.
 Lastly, the number of unique classes/labels in the data set, as well as a list of all of them:
 
 | ID | SIGN NAME | 
+|----|-----------|
 |  0 | Speed limit (20km/h) |
 |  1 | Speed limit (30km/h) |
 |  2 | Speed limit (50km/h) |
