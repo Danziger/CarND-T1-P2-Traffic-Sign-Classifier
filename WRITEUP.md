@@ -1,14 +1,24 @@
-#**Traffic Sign Recognition** 
+CarND · T1 · P2 · Traffic Sign Classifier
+=========================================
 
-##Writeup Template
 
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+[//]: # (Image References)
 
----
+[image2]: ./output/images/001%20-%20All%20Signs "All Signs"
+[image2]: ./output/images/002%20-%20Initial%20Distribution "Initial Distribution"
+[image3]: ./examples/random_noise.jpg "Random Noise"
+[image4]: ./examples/placeholder.png "Traffic Sign 1"
+[image5]: ./examples/placeholder.png "Traffic Sign 2"
+[image6]: ./examples/placeholder.png "Traffic Sign 3"
+[image7]: ./examples/placeholder.png "Traffic Sign 4"
+[image8]: ./examples/placeholder.png "Traffic Sign 5"
 
-**Build a Traffic Sign Recognition Project**
+
+Project Goals
+-------------
 
 The goals / steps of this project are the following:
+
 * Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
@@ -17,49 +27,128 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
-[//]: # (Image References)
+Rubric Points
+-------------
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
-## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
----
-###Writeup / README
+### WRITEUP / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+#### 1. Provide a WRITEUP / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it!
 
-###Data Set Summary & Exploration
+The project code can be found [here](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) and the README of this repo provides a description of the project's structure.
 
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
+### DATA SET SUMMARY & EXPLORATION
 
-* The size of training set is ?
-* The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-####2. Include an exploratory visualization of the dataset.
+I used the numpy library to calculate summary statistics of the traffic signs data set.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+First, the absolute and relative sizes of each data set:
 
-![alt text][image1]
+|   DATA SET |  UNITS |        % |
+|------------|--------|----------|
+|   TRAINING |  34799 |  67.13 % |
+| VALIDATION |   4410 |   8.51 % |
+|    TESTING |  12630 |  24.36 % |
+|      TOTAL |  51839 | 100.00 % |
 
-###Design and Test a Model Architecture
+Then, the size of each image: `32 px WIDTH × 32 px HEIGHT × 3 CHANNELS`.
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+Lastly, the number of unique classes/labels in the data set, as well as a list of all of them:
+
+| ID | SIGN NAME | 
+|----|-----------|
+|  0 | Speed limit (20km/h) |
+|  1 | Speed limit (30km/h) |
+|  2 | Speed limit (50km/h) |
+|  3 | Speed limit (60km/h) |
+|  4 | Speed limit (70km/h) |
+|  5 | Speed limit (80km/h) |
+|  6 | End of speed limit (80km/h) |
+|  7 | Speed limit (100km/h) |
+|  8 | Speed limit (120km/h) |
+|  9 | No passing |
+| 10 | No passing for vehicles over 3.5 metric tons |
+| 11 | Right-of-way at the next intersection |
+| 12 | Priority road |
+| 13 | Yield |
+| 14 | Stop |
+| 15 | No vehicles |
+| 16 | Vehicles over 3.5 metric tons prohibited |
+| 17 | No entry |
+| 18 | General caution |
+| 19 | Dangerous curve to the left |
+| 20 | Dangerous curve to the right |
+| 21 | Double curve |
+| 22 | Bumpy road |
+| 23 | Slippery road |
+| 24 | Road narrows on the right |
+| 25 | Road work |
+| 26 | Traffic signals |
+| 27 | Pedestrians |
+| 28 | Children crossing |
+| 29 | Bicycles crossing |
+| 30 | Beware of ice/snow |
+| 31 | Wild animals crossing |
+| 32 | End of all speed and passing limits |
+| 33 | Turn right ahead |
+| 34 | Turn left ahead |
+| 35 | Ahead only |
+| 36 | Go straight or right |
+| 37 | Go straight or left |
+| 38 | Keep right |
+| 39 | Keep left |
+| 40 | Roundabout mandatory |
+| 41 | End of no passing |
+| 42 | End of no passing by vehicles over 3.5 metric tons |
+
+
+#### 2. Include an exploratory visualization of the dataset.
+
+Here is an exploratory visualization of the data set.
+
+First, I plotted one image per class:
+
+![All Signs][image1]
+
+Then, I created a bar chart showing the classes distribution in each data set:
+
+![Initial Distribution][image2]
+
+
+### DESIGN AND TEST A MODEL ARCHITECTURE
+
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+
+#### DATA PREPROCESSING
+
+
+
+##### DATA SET AUGMENTATION
+
+First of, seeing the initial classes distribution, we can see some classes that are clearly underrepresented, such as class 0 (Speed limit (20km/h)), so I decided to augment the training data set in order to give the network enough chances to learn the features of the most scarce classes.
+
+To add more data to the the data set, I did the following steps:
+
+-  For a given class, calculate the desired target `T` of ocurrences, which is 1500 if there are less than 1500 ocurrences originally `O`, or 2100 otherwise. Therefore, I'm agumenting all the classes, even those that already have a decent number of examples, as the more and more variate data we have, the better our algorithm will be.
+
+  Note I still want to keep the difference in occurrences between the most common  and the least common classes, as I think it makes sense to take into consideration the natural ocurrence of signs in the real world.
+  
+- Next, I took a randonm set of `R = T - O` images from that given class that I will use as base images to generate new ones. Note the same image can be used more than once (randomly), but specially when `O < R`.
+
+- To those selected images, I apply a randomized set of transformations, which might include rotation (of -5, 5, -10, 10, -15, 15, -20, 20, -25 or 25 deg), sharpening and/or clipping.
+
+![alt text][image3]
+
+The difference between the original data set and the augmented data set is the following ... 
+
+* Improvements transforms, validation set
+
 
 As a first step, I decided to convert the images to grayscale because ...
 
@@ -68,16 +157,6 @@ Here is an example of a traffic sign image before and after grayscaling.
 ![alt text][image2]
 
 As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
 
 
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
