@@ -27,29 +27,84 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
+Rubric Points
+-------------
 
-## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
----
-###Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+### WRITEUP / README
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+#### 1. Provide a WRITEUP / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-###Data Set Summary & Exploration
+You're reading it!
 
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+The project code can be found [here](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) and the README of this repo provides a description of the project's structure.
 
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
 
-* The size of training set is ?
-* The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+### DATA SET SUMMARY & EXPLORATION
+
+#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+
+I used the numpy library to calculate summary statistics of the traffic signs data set.
+
+First, the absolute and relative sizes of each data set:
+
+|   DATA SET |  UNITS |        % |
+|------------|--------|----------|
+|   TRAINING |  34799 |  67.13 % |
+| VALIDATION |   4410 |   8.51 % |
+|    TESTING |  12630 |  24.36 % |
+|      TOTAL |  51839 | 100.00 % |
+
+Then, the size of each image: `32 px WIDTH × 32 px HEIGHT × 3 CHANNELS`.
+
+Lastly, the number of unique classes/labels in the data set, as well as a list of all of them:
+
+| ID | SIGN NAME | 
+|  0 | Speed limit (20km/h) |
+|  1 | Speed limit (30km/h) |
+|  2 | Speed limit (50km/h) |
+|  3 | Speed limit (60km/h) |
+|  4 | Speed limit (70km/h) |
+|  5 | Speed limit (80km/h) |
+|  6 | End of speed limit (80km/h) |
+|  7 | Speed limit (100km/h) |
+|  8 | Speed limit (120km/h) |
+|  9 | No passing |
+| 10 | No passing for vehicles over 3.5 metric tons |
+| 11 | Right-of-way at the next intersection |
+| 12 | Priority road |
+| 13 | Yield |
+| 14 | Stop |
+| 15 | No vehicles |
+| 16 | Vehicles over 3.5 metric tons prohibited |
+| 17 | No entry |
+| 18 | General caution |
+| 19 | Dangerous curve to the left |
+| 20 | Dangerous curve to the right |
+| 21 | Double curve |
+| 22 | Bumpy road |
+| 23 | Slippery road |
+| 24 | Road narrows on the right |
+| 25 | Road work |
+| 26 | Traffic signals |
+| 27 | Pedestrians |
+| 28 | Children crossing |
+| 29 | Bicycles crossing |
+| 30 | Beware of ice/snow |
+| 31 | Wild animals crossing |
+| 32 | End of all speed and passing limits |
+| 33 | Turn right ahead |
+| 34 | Turn left ahead |
+| 35 | Ahead only |
+| 36 | Go straight or right |
+| 37 | Go straight or left |
+| 38 | Keep right |
+| 39 | Keep left |
+| 40 | Roundabout mandatory |
+| 41 | End of no passing |
+| 42 | End of no passing by vehicles over 3.5 metric tons |
 
 ####2. Include an exploratory visualization of the dataset.
 
