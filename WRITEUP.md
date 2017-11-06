@@ -4,8 +4,8 @@ CarND · T1 · P2 · Traffic Sign Classifier
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[image2]: ./output/images/001%20-%20All%20Signs "All Signs"
+[image2]: ./output/images/002%20-%20Initial%20Distribution "Initial Distribution"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
@@ -107,15 +107,48 @@ Lastly, the number of unique classes/labels in the data set, as well as a list o
 | 41 | End of no passing |
 | 42 | End of no passing by vehicles over 3.5 metric tons |
 
-####2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+#### 2. Include an exploratory visualization of the dataset.
 
-![alt text][image1]
+Here is an exploratory visualization of the data set.
 
-###Design and Test a Model Architecture
+First, I plotted one image per class:
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+![All Signs][image1]
+
+Then, I created a bar chart showing the classes distribution in each data set:
+
+![Initial Distribution][image2]
+
+
+### DESIGN AND TEST A MODEL ARCHITECTURE
+
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+
+#### DATA PREPROCESSING
+
+
+
+##### DATA SET AUGMENTATION
+
+First of, seeing the initial classes distribution, we can see some classes that are clearly underrepresented, such as class 0 (Speed limit (20km/h)), so I decided to augment the training data set in order to give the network enough chances to learn the features of the most scarce classes.
+
+To add more data to the the data set, I did the following steps:
+
+-  For a given class, calculate the desired target `T` of ocurrences, which is 1500 if there are less than 1500 ocurrences originally `O`, or 2100 otherwise. Therefore, I'm agumenting all the classes, even those that already have a decent number of examples, as the more and more variate data we have, the better our algorithm will be.
+
+  Note I still want to keep the difference in occurrences between the most common  and the least common classes, as I think it makes sense to take into consideration the natural ocurrence of signs in the real world.
+  
+- Next, I took a randonm set of `R = T - O` images from that given class that I will use as base images to generate new ones. Note the same image can be used more than once (randomly), but specially when `O < R`.
+
+- To those selected images, I apply a randomized set of transformations, which might include rotation (of -5, 5, -10, 10, -15, 15, -20, 20, -25 or 25 deg), sharpening and/or clipping.
+
+![alt text][image3]
+
+The difference between the original data set and the augmented data set is the following ... 
+
+* Improvements transforms, validation set
+
 
 As a first step, I decided to convert the images to grayscale because ...
 
@@ -124,16 +157,6 @@ Here is an example of a traffic sign image before and after grayscaling.
 ![alt text][image2]
 
 As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
 
 
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
