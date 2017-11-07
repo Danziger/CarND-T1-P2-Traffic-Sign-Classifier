@@ -4,7 +4,7 @@ CarND · T1 · P2 · Traffic Sign Classifier
 
 [//]: # (Image References)
 
-[image2]: ./output/images/001%20-%20All%20Signs.png "All Signs"
+[image1]: ./output/images/001%20-%20All%20Signs.png "All Signs"
 [image2]: ./output/images/002%20-%20Initial%20Distribution.png "Initial Distribution"
 [image3]: ./output/images/003%20-%20Preprocessing%20Combinations.png "Preprocessing Combinations"
 [image4]: ./output/images/004%20-%20Augmentation%20Examples.png "Augmentation Examples"
@@ -125,41 +125,76 @@ Then, I created a bar chart showing the classes distribution in each data set:
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-#### DATA PREPROCESSING
+#### DATA PREPROCESSING IMPLEMENTATION
+
+The preprocessing techniques I considered are:
+
+- Grayscaling, as grayscale images are faster to process, thus speeding up learning, than color ones (one channel VS three).
+
+    Also, even though the color information might be very useful to identify some signs, if used, it's important to augment the data set with "incorrectly colored" or "artificially tinted" images, as some real-world illumination conditions, such us really bright sunlight, headlights reflections, tail lights colorful illumination, neon/led signs, traffic lights... will generate weirdly colored inputs.
+  
+- Augmenting contrast (on the Y channel of color images) or histogram equalization (on grayscal images), to clearly distinguish shapes and figures, specially on really dark or bright images.
+
+- Sharpening (using Gaussian Blur), again, to clearly distinguish shapes, figures and borders.
+
+- Cropping, to remove irrelevant information, as most signs don't extend to the border of the image, but keep a generous margin around instead.
+
+Note normalization is not mentioned here because, as I will also augment the training set, that step will be applied after that on the whole augmented training set, instead of just on the original images.
+
+In order to decide which of this options to apply and how to combine them, I plotted different possible combinations and took the one where the signs were sharper and easier to distinguish, which in my opinion is the last column, that is, `GRAYSCALE ∘ CONTRAST ∘ SHARPEN ∘ CROP`:
+
+![Preprocessing Combinations][image3]
+
+Note this preprocessing is applied to all 3 datasets (training, validation and test).
 
 
+#### DATA PREPROCESSING POSSIBLE IMPROVEMENTS
 
-##### DATA SET AUGMENTATION
+Instead of a small cropping of the image, a gradient region filter (vignette) might be used to filter out irrelevant data progressively (the closer to the border of the image, the less relevant it's likely to be).
 
-First of, seeing the initial classes distribution, we can see some classes that are clearly underrepresented, such as class 0 (Speed limit (20km/h)), so I decided to augment the training data set in order to give the network enough chances to learn the features of the most scarce classes.
+Some other image processing algorithms might be used. In fact, I'm really curious to know if a canny edge detection processed image (just edges, without the original image) would yield better results.
+
+
+##### DATA SET AUGMENTATION IMPLEMENTATION
+
+Next, we can see from the initial classes distributionthat some classes are clearly underrepresented, such as class 0 (Speed limit (20km/h)), so I decided to augment the training data set in order to give the network enough chances to learn the features of the most scarce classes.
 
 To add more data to the the data set, I did the following steps:
 
 -  For a given class, calculate the desired target `T` of ocurrences, which is 1500 if there are less than 1500 ocurrences originally `O`, or 2100 otherwise. Therefore, I'm agumenting all the classes, even those that already have a decent number of examples, as the more and more variate data we have, the better our algorithm will be.
 
-  Note I still want to keep the difference in occurrences between the most common  and the least common classes, as I think it makes sense to take into consideration the natural ocurrence of signs in the real world.
+    Note I still want to keep the difference in occurrences between the most common  and the least common classes, as I think it makes sense to take into consideration the natural ocurrence of signs in the real world.
   
 - Next, I took a randonm set of `R = T - O` images from that given class that I will use as base images to generate new ones. Note the same image can be used more than once (randomly), but specially when `O < R`.
 
 - To those selected images, I apply a randomized set of transformations, which might include rotation (of -5, 5, -10, 10, -15, 15, -20, 20, -25 or 25 deg), sharpening and/or clipping.
 
-![alt text][image3]
+Below you can see some examples of these randomly generated images are:
 
-The difference between the original data set and the augmented data set is the following ... 
+![Augmentation Examples][image4]
 
-* Improvements transforms, validation set
+After augmenting all the classes, the new classes distribution looks like this:
 
-
-As a first step, I decided to convert the images to grayscale because ...
-
-Here is an example of a traffic sign image before and after grayscaling.
-
-![alt text][image2]
-
-As a last step, I normalized the image data because ...
+![Augmented Distribution][image5]
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+##### DATA SET AUGMENTATION POSSIBLE IMPROVEMENTS
+
+A more methodical approach might be used to generate (evem more and more variated) additional examples instead of relaying so much on randomness.
+
+Also, a matrix transform could be used instead of a simple 2D rotation to achieve 3D rotation/projection.
+
+Saturation/lightness transformations of all kind might be used as well: uniform transformations, randomly-shaped filters (one half of the image gets a filter, the other half another one, or the opposite...), gradient filters resembling spot lights or reflexions...
+
+Additionally, random noise/marks could be introduced or drawn on top of the images resembling tree branches, paint deterioration, corrosion, rain, fog...
+
+
+#### DATA SET NORMALIZATION
+
+Lastly, all 3 datasets are normalized to speed up convergence and ensure all feature are equally represented in the resulting model.
+
+
+#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 My final model consisted of the following layers:
 
