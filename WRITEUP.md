@@ -404,16 +404,21 @@ The second image might be difficult to classify because the sign is too close to
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+- 👍 Yield
+- 👎 Stop. Predicted Yield.
+- 👍 Road Work
+- 👍 Priority Road
+- 👍 Speed Limit (30km/h)
+- 👍 Better Stop
 
+Wihtout considering the 6th image, the model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. However, if I had found the second stop sign first, I would have got a 100% and not notice this issue.
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+This compares favorably to the accuracy on the test set of 96.7%, but is not representative as the size of this set is too small.
+
+What's important here is that even though both stop signs are easily distingible to the naked eye, the algorithm was not able to properly identify the first one (even though it suspected it might be a stop sign, as we will see next). Therefore, the hypothesis of the first stop sign having too much zoom looks quite feasible.
+
+Probably, further augmenting the training set and changing the augmentation algorithm to generate more varied images, as it has been suggested prevopusly, would have help to mitigating this issue.
+
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
