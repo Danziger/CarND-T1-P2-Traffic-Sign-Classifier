@@ -9,11 +9,13 @@ CarND · T1 · P2 · Traffic Sign Classifier
 [image3]: ./output/images/003%20-%20Preprocessing%20Combinations.png "Preprocessing Combinations"
 [image4]: ./output/images/004%20-%20Augmentation%20Examples.png "Augmentation Examples"
 [image5]: ./output/images/005%20-%20Augmented%20Distribution.png "Augmented Distribution"
+[image6]: ./output/images/006%20-%Accuracy%Plot.png "Accuracy Plot"
+
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 
-
+ 
 Project Goals
 -------------
 
@@ -198,43 +200,180 @@ Lastly, all 3 datasets are normalized to speed up convergence and ensure all fea
 
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+<table>
+    <tr>
+        <th>STEP</th>
+        <th>LAYER</th>
+        <th>IN. SIZE</th>
+        <th>OUT. SIZE</th>
+        <th>DESCRIPTION</th>
+    </tr>
+    <tr>
+        <td>Input</td>
+        <td>Input</td>
+        <td>28 × 28 × 1</td>
+        <td>28 × 28 × 1</td>
+        <td>38 × 38 × 1 grayscale image.</td>
+    </tr>
+    <tr>
+        <td rowspan="4">Convolution 1</td>
+        <td>Convolution 7 × 7</td>
+        <td>28 × 28 × 1</td>
+        <td>28 × 28 × 64</td>
+        <td>1 × 1 stride, SAME padding</td>
+    </tr>
+    <tr>
+        <td>RELU</td>
+        <td>28 × 28 × 64</td>
+        <td>28 × 28 × 64</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Max pooling</td>
+        <td>28 × 28 × 64</td>
+        <td>14 × 14 × 64</td>
+        <td>2 × 2 stride</td>
+    </tr>
+    <tr>
+        <td>Dropout</td>
+        <td>14 × 14 × 64</td>
+        <td>14 × 14 × 64</td>
+        <td>0.6 keep rate</td>
+    </tr>
+    <tr>
+        <td rowspan="4">Convolution 2</td>
+        <td>Convolution 5 × 5</td>
+        <td>14 × 14 × 64</td>
+        <td>14 × 14 × 128</td>
+        <td>1 × 1 stride, SAME padding</td>
+    </tr>
+    <tr>
+        <td>RELU</td>
+        <td>14 × 14 × 128</td>
+        <td>14 × 14 × 128</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Max pooling</td>
+        <td>14 × 14 × 128</td>
+        <td>7 × 7 × 128</td>
+        <td>2 × 2 stride</td>
+    </tr>
+    <tr>
+        <td>Dropout</td>
+        <td>7 × 7 × 128</td>
+        <td>7 × 7 × 128</td>
+        <td>0.6 keep rate</td>
+    </tr>
+    <tr>
+        <td rowspan="3">Convolution 3</td>
+        <td>Convolution 3 × 3</td>
+        <td>7 × 7 × 128</td>
+        <td>5 × 5 × 256</td>
+        <td>1 × 1 stride, SAME padding</td>
+    </tr>
+    <tr>
+        <td>RELU</td>
+        <td>5 × 5 × 256</td>
+        <td>5 × 5 × 256</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Dropout</td>
+        <td>5 × 5 × 256</td>
+        <td>5 × 5 × 256</td>
+        <td>0.6 keep rate</td>
+    </tr>
+    <tr>
+        <td>Flattening</td>
+        <td>Flatten</td>
+        <td>5 × 5 × 256</td>
+        <td>6400 × 1</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td rowspan="2">Fully Connected 1</td>
+        <td>Fully connected</td>
+        <td>6400 × 1</td>
+        <td>256 × 1</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Dropout</td>
+        <td>256 × 1</td>
+        <td>256 × 1</td>
+        <td>0.6 keep rate</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Fully Connected 2</td>
+        <td>Fully connected</td>
+        <td>256 × 1</td>
+        <td>128 × 1</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Dropout</td>
+        <td>256 × 1</td>
+        <td>256 × 1</td>
+        <td>0.6 keep rate</td>
+    </tr>
+    <tr>
+        <td>Fully Connected 3</td>
+        <td>Fully connected</td>
+        <td>128 × 1</td>
+        <td>43 × 1</td>
+        <td></td>
+    </tr>
+</table>
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+The first thing I added was [Xavier initializer](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf), which keeps the  scale of the gradients similar in all layers, speeding up convergence, so I don't need the params `mu` and `sigma` anymore.
+
+Next, after taking a look at [this comparison of optimizers](http://int8.io/comparison-of-optimization-techniques-stochastic-gradient-descent-momentum-adagrad-and-adadelta/#AdaGrad_8211_experiments), I decided to use Adargad instead of Adam with a learning rate of 0.05 to speed up learning, altought probably Momentum could have been a better choice and a smaller learning rate could have achieved a greater accuracy.
+
+I have experimented with different batch sizes and the best two values have been 196 and 256, finally keeping the later for the latest, best results.
+
+The same applies to the number of epochs. Initially, I started with just 8 of them and, as I made changes to the architecture, params and augmented data and started getting better results, I increased it to 16, then to 32 and finally to 64 for the last few runs, which surprisingly for me decresed the accuracy in validation, but increased it in test. Anyway, after iteration 32 there are no big nor relevant gains anymore, probably because the augmented training set is not richer and variated enough.
+
+Once I added dropout layers, I tried different values in order to prevent overfitting the training data without causing underfit and I finally found the best value for this particular case is 0.6.
+
+Just as a reference, these are the last runs and modifications I made to the params and training set:
+
+| EPOCHS | KEEP PROB. | BATCH SIZE | TRAIN. ACC. | VAL. ACC. | TEST ACC. | CONCLUSION / ACTION |
+| 16 | 0.50 | 196 |  < 1 | 0.964 | 0.948 | Underfit. Adjust params.
+| 16 | 0.50 | 256 |  < 1 | 0.977 | 0.949 | Underfit. Adjust params.
+| 16 | 0.75 | 196 |  < 1 | 0.962 | 0.949 | Overfit. Adjust params.
+| 16 | 0.75 | 256 |  < 1 | 0.968 | 0.949 | Overfit. Adjust params.
+| 32 | 0.75 | 256 |  < 1 | 0.971 | 0.955 | Overfit. Adjust params and further augment the training set.
+| 32 | 0.75 | 256 | 1.00 | 0.973 | 0.952 | Overfit. Improve augmentation algorithm.
+| 32 | 0.75 | 256 | 1.00 | 0.975 | 0.954 | Overfit. Adjust keep probability.
+| 32 | 0.65 | 256 | 1.00 | 0.979 | 0.958 | Overfit. Adjust keep probability.
+| 32 | 0.50 | 256 | 1.00 | 0.980 | 0.956 | Underfit. Adjust keep probability.
+| 32 | 0.55 | 256 | 1.00 | 0.981 | 0.960 | Underfit. Adjust keep probability.
+| 32 | 0.60 | 256 | 1.00 | 0.985 | 0.961 | Looks better now. Increase epochs.
+| 64 | 0.60 | 256 | 1.00 | 0.984 | 0.967 | 
+
+Here is a plot of the accuracy of the  final architecture and params combination in training (blue) and validation (orange):
+
+![Accuracy Plot][image5]
+
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+My final model results are:
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+* Training set accuracy of 100%
+* Validation set accuracy of 98.4%
+* Test set accuracy of 96.7%
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+I initially started with a LeNet architecture with additional convolutions and fully connected layers, as I suspected a typicall LeNet would suffer from underfit. The reason for this is that I think this approach is more interesting, as a learning experience, than reading a paper about some really good architecture and just implementing that.
+
+The initial params for the network were just guessed and later adjusted by trial and error. Its main problem was overfit, which I addressed by adding dropout layers and augmenting the training data set.
+
+Once I was happy with the architecture itself, I spend some time fine-tunning its params, as explained in the previous point.
+
 
 ### TEST THE MODEL ON NEW IMAGES
 
@@ -246,6 +385,7 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image7] ![alt text][image8]
 
 The first image might be difficult to classify because ...
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
