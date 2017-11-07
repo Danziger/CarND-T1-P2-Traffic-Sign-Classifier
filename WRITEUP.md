@@ -150,9 +150,9 @@ Note this preprocessing is applied to all 3 datasets (training, validation and t
 
 #### DATA PREPROCESSING POSSIBLE IMPROVEMENTS
 
-Instead of a small cropping of the image, a gradient region filter (vignette) might be used to filter out irrelevant data progressively (the closer to the border of the image, the less relevant it's likely to be).
+Instead of a small cropping of the image, a gradient region filter (vignette) might be used to filter out irrelevant data progressively (the closer to the border of the image, the less relevant it's likely to be). Also, Hough transforms might be used to detect arbitrary shapes (circle, triangle, squares or hexagons) and filter out the background of the image before applying the other preprocessing operations.
 
-Some other image processing algorithms might be used. In fact, I'm really curious to know if a canny edge detection processed image (just edges, without the original image) would yield better results.
+Another possible image processing algorithm that we might want to apply is canny edge detection.
 
 
 ##### DATA SET AUGMENTATION IMPLEMENTATION
