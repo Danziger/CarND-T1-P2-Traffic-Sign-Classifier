@@ -10,6 +10,7 @@ CarND · T1 · P2 · Traffic Sign Classifier
 [image4]: ./output/images/004%20-%20Augmentation%20Examples.png "Augmentation Examples"
 [image5]: ./output/images/005%20-%20Augmented%20Distribution.png "Augmented Distribution"
 [image6]: ./output/images/006%20-%20Accuracy%20plot.png "Accuracy Plot"
+[image7]: ./output/images/007%20-%20Probability%20Plot.png "Probability Plot"
 
 [sign1]: ./input/images/resized/001%20-%20Yield.jpg "Yield"
 [sign2]: ./input/images/resized/002%20-%20Stop.jpg "Stop"
@@ -413,29 +414,23 @@ Here are the results of the prediction:
 
 Wihtout considering the 6th image, the model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. However, if I had found the second stop sign first, I would have got a 100% and not notice this issue.
 
-This compares favorably to the accuracy on the test set of 96.7%, but is not representative as the size of this set is too small.
+Depending on which case we consider, it will compare favorably or not to the accuracy on the test set of 96.7%, but neither case is representative as the size of this set is too small.
 
-What's important here is that even though both stop signs are easily distingible to the naked eye, the algorithm was not able to properly identify the first one (even though it suspected it might be a stop sign, as we will see next). Therefore, the hypothesis of the first stop sign having too much zoom looks quite feasible.
+What's important to note here is that even though both stop signs are easily distingible to the naked eye, the algorithm was not able to properly identify the first one (even though it suspected it might be a stop sign, as we will see next). Therefore, the hypothesis of the first stop sign having too much zoom looks quite feasible.
 
-Probably, further augmenting the training set and changing the augmentation algorithm to generate more varied images, as it has been suggested prevopusly, would have help to mitigating this issue.
+Probably, further augmenting the training set and improving the augmentation algorithm to generate more varied images, as it has been suggested previously, would have help to mitigating this issue.
 
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the "Step 3" section of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+The model is quite certain about all its predictions (which are 100% or close to it), with the exception of the incorrectly labeled Stop sign, which gets a probability of 46% of being a Yield sign, a 40% of being a Stop sign and some other residual probabilities for different Speed Limit signs, as we can see here:
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+![Probability Plot][image7]
 
+The positive side of this is that the probability of a Stop sign is there and is just slightly lower than the Yield's one. That probably means that, as I already said in the previous question, with better augmented (or real) data, that problem could be mitigated and a highest accuracy in test achieved.
 
-For the second image ... 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
