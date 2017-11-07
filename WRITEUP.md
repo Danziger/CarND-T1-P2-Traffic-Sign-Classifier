@@ -4,11 +4,11 @@ CarND · T1 · P2 · Traffic Sign Classifier
 
 [//]: # (Image References)
 
-[image2]: ./output/images/001%20-%20All%20Signs "All Signs"
-[image2]: ./output/images/002%20-%20Initial%20Distribution "Initial Distribution"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
+[image2]: ./output/images/001%20-%20All%20Signs.png "All Signs"
+[image2]: ./output/images/002%20-%20Initial%20Distribution.png "Initial Distribution"
+[image3]: ./output/images/003%20-%20Preprocessing%20Combinations.png "Preprocessing Combinations"
+[image4]: ./output/images/004%20-%20Augmentation%20Examples.png "Augmentation Examples"
+[image5]: ./output/images/005%20-%20Augmented%20Distribution.png "Augmented Distribution"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
