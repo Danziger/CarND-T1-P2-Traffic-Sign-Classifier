@@ -9,11 +9,14 @@ CarND · T1 · P2 · Traffic Sign Classifier
 [image3]: ./output/images/003%20-%20Preprocessing%20Combinations.png "Preprocessing Combinations"
 [image4]: ./output/images/004%20-%20Augmentation%20Examples.png "Augmentation Examples"
 [image5]: ./output/images/005%20-%20Augmented%20Distribution.png "Augmented Distribution"
-[image6]: ./output/images/006%20-%Accuracy%plot.png "Accuracy Plot"
+[image6]: ./output/images/006%20-%20Accuracy%20plot.png "Accuracy Plot"
 
-[image9]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[sign1]: ./input/images/resized/001%20-%20Yield.jpg "Yield"
+[sign2]: ./input/images/resized/002%20-%20Stop.jpg "Stop"
+[sign3]: ./input/images/resized/003%20-%20Road%20Work.jpg "Road Work"
+[sign4]: ./input/images/resized/004%20-%20Priority%20Road.jpg "Priority Road"
+[sign5]: ./input/images/resized/005%20-%20Speed%20limit%20(30km:h).jpg "Speed limit (30km/h)"
+[sign6]: ./input/images/resized/006%20-%20Better%20Stop.jpg "Better Stop"
 
  
 Project Goals
@@ -380,12 +383,21 @@ Once I was happy with the architecture itself, I spend some time fine-tunning it
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are five German traffic signs that I found on the web, plus an additional one for the reasons explained below, all with their original sizes:
 
-![Yield][sign1] ![Stop][sign2] ![Road Work][sign3] 
-![Priority Road][sign4] ![Speed limit (30km:h)][sign6]
+<span><img src="./input/images/originals/001%20-%20Yield.jpg" alt="Yield" height="200" /></span>
+<span><img src="./input/images/originals/002%20-%20Stop.jpg" alt="Stop" height="200" /></span>
+<span><img src="./input/images/originals/003%20-%20Road%20Work.jpg" alt="Road Work" height="200" /></span>
 
-The first image might be difficult to classify because ...
+<span><img src="./input/images/originals/004%20-%20Priority%20Road.jpg" alt="Priority Road" height="200" /></span>
+<span><img src="./input/images/originals/005%20-%20Speed%20limit%20(30km:h).jpg" alt="Speed limit (30km/h)" height="200" /></span>
+<span><img src="./input/images/originals/006%20-%20Better%20Stop.jpg" alt="Better Stop" height="200" /></span>
+
+Once cropped and scaled down, they look like this:
+
+![Yield][sign1] ![Stop][sign2] ![Road Work][sign3] ![Priority Road][sign4] ![Speed limit (30km:h)][sign5] ![Better Stop][sign6]
+
+The second image might be difficult to classify because the sign is too close to the borders of the image (too much zoom), while most images from the data sets have quite generous margins around. To check if that's actually true or not in case the prediction fails, I added a 6th image of a different stop sign that is better centered in the image.
 
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
