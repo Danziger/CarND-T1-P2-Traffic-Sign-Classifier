@@ -9,9 +9,9 @@ CarND · T1 · P2 · Traffic Sign Classifier
 [image3]: ./output/images/003%20-%20Preprocessing%20Combinations.png "Preprocessing Combinations"
 [image4]: ./output/images/004%20-%20Augmentation%20Examples.png "Augmentation Examples"
 [image5]: ./output/images/005%20-%20Augmented%20Distribution.png "Augmented Distribution"
-[image6]: ./output/images/006%20-%Accuracy%Plot.png "Accuracy Plot"
+[image6]: ./output/images/006%20-%Accuracy%plot.png "Accuracy Plot"
 
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
+[image9]: ./examples/placeholder.png "Traffic Sign 3"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 
@@ -342,6 +342,7 @@ Once I added dropout layers, I tried different values in order to prevent overfi
 Just as a reference, these are the last runs and modifications I made to the params and training set:
 
 | EPOCHS | KEEP PROB. | BATCH SIZE | TRAIN. ACC. | VAL. ACC. | TEST ACC. | CONCLUSION / ACTION |
+|--------|------------|------------|-------------|-----------|-----------|---------------------|
 | 16 | 0.50 | 196 |  < 1 | 0.964 | 0.948 | Underfit. Adjust params.
 | 16 | 0.50 | 256 |  < 1 | 0.977 | 0.949 | Underfit. Adjust params.
 | 16 | 0.75 | 196 |  < 1 | 0.962 | 0.949 | Overfit. Adjust params.
@@ -357,7 +358,7 @@ Just as a reference, these are the last runs and modifications I made to the par
 
 Here is a plot of the accuracy of the  final architecture and params combination in training (blue) and validation (orange):
 
-![Accuracy Plot][image5]
+![Accuracy Plot][image6]
 
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
@@ -381,8 +382,8 @@ Once I was happy with the architecture itself, I spend some time fine-tunning it
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![Yield][sign1] ![Stop][sign2] ![Road Work][sign3] 
+![Priority Road][sign4] ![Speed limit (30km:h)][sign6]
 
 The first image might be difficult to classify because ...
 
