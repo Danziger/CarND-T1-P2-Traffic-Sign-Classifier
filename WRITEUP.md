@@ -1,5 +1,5 @@
-CarND · T1 · P2 · Traffic Sign Classifier
-=========================================
+CarND · T1 · P2 · Traffic Sign Classifier Writeup
+=================================================
 
 
 [//]: # (Image References)
@@ -379,6 +379,54 @@ The initial params for the network were just guessed and later adjusted by trial
 
 Once I was happy with the architecture itself, I spend some time fine-tunning its params, as explained in the previous point.
 
+Additionally, I have also calculated the precision and recall values for each sign:
+
+|                                               SIGN |  PRECISION |     RECALL |
+|----------------------------------------------------|------------|------------|
+|                               Speed limit (20km/h) |  93.220339 |  91.666667 |
+|                               Speed limit (30km/h) |  98.601399 |  97.916667 |
+|                               Speed limit (50km/h) |  97.131682 |  99.333333 |
+|                               Speed limit (60km/h) |  97.471264 |  94.222222 |
+|                               Speed limit (70km/h) |  97.155689 |  98.333333 |
+|                               Speed limit (80km/h) |  91.297710 |  94.920635 |
+|                        End of speed limit (80km/h) | 100.000000 |  78.000000 |
+|                              Speed limit (100km/h) |  96.171171 |  94.888889 |
+|                              Speed limit (120km/h) |  97.111111 |  97.111111 |
+|                                         No passing |  99.173554 | 100.000000 |
+|       No passing for vehicles over 3.5 metric tons |  99.847328 |  99.090909 |
+|              Right-of-way at the next intersection |  88.738739 |  93.809524 |
+|                                      Priority road |  96.760563 |  99.565217 |
+|                                              Yield |  99.722222 |  99.722222 |
+|                                               Stop | 100.000000 | 100.000000 |
+|                                        No vehicles |  97.674419 | 100.000000 |
+|           Vehicles over 3.5 metric tons prohibited | 100.000000 |  99.333333 |
+|                                           No entry | 100.000000 |  99.722222 |
+|                                    General caution |  98.538012 |  86.410256 |
+|                        Dangerous curve to the left |  83.333333 | 100.000000 |
+|                       Dangerous curve to the right |  97.402597 |  83.333333 |
+|                                       Double curve |  94.594595 |  77.777778 |
+|                                         Bumpy road |  96.747967 |  99.166667 |
+|                                      Slippery road |  96.710526 |  98.000000 |
+|                          Road narrows on the right |  95.698925 |  98.888889 |
+|                                          Road work |  98.286938 |  95.625000 |
+|                                    Traffic signals |  90.909091 | 100.000000 |
+|                                        Pedestrians |  71.929825 |  68.333333 |
+|                                  Children crossing |  97.333333 |  97.333333 |
+|                                  Bicycles crossing |  92.783505 | 100.000000 |
+|                                 Beware of ice/snow |  83.108108 |  82.000000 |
+|                              Wild animals crossing |  89.333333 |  99.259259 |
+|                End of all speed and passing limits |  93.750000 | 100.000000 |
+|                                   Turn right ahead | 100.000000 | 100.000000 |
+|                                    Turn left ahead |  97.540984 |  99.166667 |
+|                                         Ahead only |  99.226804 |  98.717949 |
+|                               Go straight or right |  98.360656 | 100.000000 |
+|                                Go straight or left |  95.238095 | 100.000000 |
+|                                         Keep right |  99.698795 |  95.942029 |
+|                                          Keep left | 100.000000 | 100.000000 |
+|                               Roundabout mandatory |  88.043478 |  90.000000 |
+|                                  End of no passing | 100.000000 |  91.666667 |
+| End of no passing by vehicles over 3.5 metric tons |  95.744681 | 100.000000 |
+
 
 ### TEST THE MODEL ON NEW IMAGES
 
@@ -432,7 +480,8 @@ The model is quite certain about all its predictions (which are 100% or close to
 The positive side of this is that the probability of a Stop sign is there and is just slightly lower than the Yield's one. That probably means that, as I already said in the previous question, with better augmented (or real) data, that problem could be mitigated and a highest accuracy in test achieved.
 
 
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+### (Optional) Visualizing the Neural Network
+
+#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
 
