@@ -430,6 +430,7 @@ Additionally, I have also calculated the precision and recall values for each si
 |                                  End of no passing | 100.000000 |  91.666667 |
 | End of no passing by vehicles over 3.5 metric tons |  95.744681 | 100.000000 |
 
+We an see one of the worst performing signs is the "Pedestrians" one, followed by "Beware of ice/snow".
 
 ### TEST THE MODEL ON NEW IMAGES
 
