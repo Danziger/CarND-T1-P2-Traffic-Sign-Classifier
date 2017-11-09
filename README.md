@@ -3,7 +3,7 @@ CarND · T1 · P2 · Traffic Sign Classifier
 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-<img src="examples/images/nn-state-visualization.jpg" width="512" alt="Neural network's state visualization" />
+<img src="output/images/010 - Feature Map Better Stop.png" width="512" alt="Better Stop Sign's First Layer Features Map" />
 
 
 Project Overview
