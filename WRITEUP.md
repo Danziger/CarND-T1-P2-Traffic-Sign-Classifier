@@ -11,6 +11,9 @@ CarND · T1 · P2 · Traffic Sign Classifier Writeup
 [image5]: ./output/images/005%20-%20Augmented%20Distribution.png "Augmented Distribution"
 [image6]: ./output/images/006%20-%20Accuracy%20plot.png "Accuracy Plot"
 [image7]: ./output/images/007%20-%20Probability%20Plot.png "Probability Plot"
+[image8]: ./output/images/008%20-%20Feature%20Map%20Yield.png "Feature Map Yield"
+[image9]: ./output/images/009%20-%20Feature%20Map%20Stop.png "Feature Map Stop"
+[image10]: ./output/images/010%20-%20Feature%20Map%20Better%20Stop.png "Feature Map Better Stop"
 
 [sign1]: ./input/images/resized/001%20-%20Yield.jpg "Yield"
 [sign2]: ./input/images/resized/002%20-%20Stop.jpg "Stop"
@@ -217,7 +220,7 @@ My final model consisted of the following layers:
         <td>Input</td>
         <td>28 × 28 × 1</td>
         <td>28 × 28 × 1</td>
-        <td>38 × 38 × 1 grayscale image.</td>
+        <td>28 × 28 × 1 grayscale image.</td>
     </tr>
     <tr>
         <td rowspan="4">Convolution 1</td>
@@ -484,4 +487,15 @@ The positive side of this is that the probability of a Stop sign is there and is
 
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+Here we can visualize the first 7 × 7 Convolutional Layer + RELU + 2 × 2 Max Pooling for the downloaded Yield, Stop and Better Stop signs:
 
+**YIELD:**
+![Yield][image8]
+
+**STOP:**
+![Stop][image9]
+
+**BETTER STOP:**
+![Better Stop][image10]
+
+We can see that the outer shape of he sign and even the text on the Stop signs are still quite recognizable.
