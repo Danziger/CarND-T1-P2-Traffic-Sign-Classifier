@@ -67,3 +67,20 @@ git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project
 cd CarND-Traffic-Sign-Classifier-Project
 jupyter notebook Traffic_Sign_Classifier.ipynb
 ```
+
+
+Additional Resources
+--------------------
+
+- The AI Conf 2017 - A visual and intuitive understanding of deep learning:
+
+  https://www.youtube.com/watch?time_continue=2002&v=Oqm9vsf_hvU
+  
+- 3Blue1Brown Deep Learning Series:
+
+  https://www.youtube.com/watch?v=aircAruvnKk
+  
+- Understand and apply CapsNet on Traffic sign classification:
+
+  https://becominghuman.ai/understand-and-apply-capsnet-on-traffic-sign-classification-a592e2d4a4ea
+
