@@ -74,7 +74,7 @@ Additional Resources
 
 - The AI Conf 2017 - A visual and intuitive understanding of deep learning:
 
-  https://www.youtube.com/watch?time_continue=2002&v=Oqm9vsf_hvU
+  https://www.youtube.com/watch?v=Oqm9vsf_hvU
   
 - 3Blue1Brown Deep Learning Series:
 
