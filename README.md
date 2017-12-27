@@ -24,6 +24,10 @@ The project structure has been changed a bit to have multiple files for multiple
 
 Contains additional traffic sign `images` downloaded from the Internet and a CSV file with the traffic signs names, `data/signnames.csv`.
 
+### `output/images`
+
+Images generated for the write up.
+
 
 ### `src/notebooks`
 
