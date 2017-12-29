@@ -52,6 +52,7 @@ The goals/steps of this project are:
 
 
 ### Dependencies
+
 This lab requires:
 
 * [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
