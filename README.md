@@ -1,5 +1,5 @@
-CarND · T1 · P2 · Traffic Sign Classifier
-=========================================
+CarND · T1 · P2 · Traffic Sign Classifier Project
+=================================================
 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
